@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:k_fay/pages/HomePage.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:k_fay/pages/filtro.dart';
 
 
 
 
-
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -37,9 +42,14 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: HomePage(),
+      home: FiltroPage(),
     );
   }
+
+
+
+
+
 }
 
 
