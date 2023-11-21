@@ -9,12 +9,12 @@ class WidgetEvento extends StatelessWidget {
   final String fecha;
   final String titulo;
   final String? ciudad;
-  final int likes;
+  final int? likes;
   final Widget? destino;
 
   final Widget? imagen;
 
-  WidgetEvento({this.fecha="", this.titulo="", this.ciudad, this.likes=0, this.imagen,this.destino });
+  WidgetEvento({this.fecha="", this.titulo="", this.ciudad, this.likes, this.imagen,this.destino });
 
  @override
   Widget build(BuildContext context) {
