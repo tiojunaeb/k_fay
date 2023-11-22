@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:k_fay/pages/DetallePage.dart';
+import 'package:k_fay/widget/WidgetDetallePage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:k_fay/services/firestore_service.dart';
 import 'package:k_fay/widget/WidgetEvento.dart';
@@ -52,8 +52,9 @@ class HomePage extends StatelessWidget {
         child: Icon(MdiIcons.partyPopper, color: Colors.red,),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         backgroundColor: Colors.white,
-        onPressed: () async {
-            await LogGoogle();
+        onPressed: ()async{
+          await LogGoogle();
+
         }),
     );
 

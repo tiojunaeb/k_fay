@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class DetallePage extends StatelessWidget {
-  const DetallePage({super.key});
+class WidgetDetallePage extends StatelessWidget {
+  const WidgetDetallePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -65,8 +65,6 @@ class DetallePage extends StatelessWidget {
             ),),)
             )],
           )
-
-          
         ],
       )
     );
