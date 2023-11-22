@@ -20,7 +20,6 @@ class FirestoreService{
   }
 
 
-
   Future<void> BorrarEvento(String Id) async {
     return FirebaseFirestore.instance.collection('eventos').doc(Id).delete();
   }
@@ -43,7 +42,6 @@ class FirestoreService{
     return FirebaseFirestore.instance.collection('eventos')
       .where('fecha', isGreaterThanOrEqualTo: fechaAct)
       .where('fecha', isLessThanOrEqualTo: fechaFut)
-      
       .snapshots();
   }
 
