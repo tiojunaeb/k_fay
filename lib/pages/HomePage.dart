@@ -52,7 +52,9 @@ class HomePage extends StatelessWidget {
         child: Icon(MdiIcons.partyPopper, color: Colors.red,),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         backgroundColor: Colors.white,
-        onPressed: (){}),
+        onPressed: () async {
+            await LogGoogle();
+        }),
     );
 
   }
