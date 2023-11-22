@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:intl/intl.dart';
 
-class WidgetDetallePage extends StatelessWidget {
-  const WidgetDetallePage({super.key});
-
+class DetallePage extends StatelessWidget {
+  final dynamic evento;
+  final DateTime fechaEvento;
+  DetallePage({required this.evento, required this.fechaEvento});
+  final formatoFecha = DateFormat('dd-MM-yyyy');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,12 +17,26 @@ class WidgetDetallePage extends StatelessWidget {
         
         children: [
           Container(
-            width: 360,
-            height: 360,
-            child: Image.asset('assets/paes.png'),
+            padding: EdgeInsets.all(30),
+            child: Container(
+              width: 300,
+              height: 300,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                  color: Colors.black,
+                  width: 3
+                )
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                
+                child: Image.asset('assets/paes.png', fit: BoxFit.cover,),
+              )
+            ),
           ),
           Container(child: 
-          Text('Adios paes', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+          Text('${evento['titulo']}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19)),
           ),
           Row(
            children: [
@@ -30,7 +47,7 @@ class WidgetDetallePage extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-              Text('jueves, noviembre 23, 2023', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+              Text('${formatoFecha.format(fechaEvento)}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
               Text('Hora: 20:30-5:00')])
            ],),
            Container(
@@ -38,8 +55,9 @@ class WidgetDetallePage extends StatelessWidget {
               Container(child: 
               Icon(MdiIcons.mapMarker, size: 50,)),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Viña del mar', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                  Text('${evento['ubicacion']}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
                   Text('Hotel sheraton'),
                 ],
               )
@@ -51,7 +69,7 @@ class WidgetDetallePage extends StatelessWidget {
            children: [
              Icon(MdiIcons.heart, size: 50,),
              Column(children: [
-              Text('  0 ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30))
+              Text('${evento['likes']}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30))
              ],)
            ],
           ),
