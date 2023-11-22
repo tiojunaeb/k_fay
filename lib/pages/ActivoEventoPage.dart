@@ -23,12 +23,12 @@ class ActivoEventoPage extends StatelessWidget {
                     separatorBuilder: (context, index) => Divider(),
                     itemCount: snapshot.data!.docs.length, 
                     itemBuilder: (context, index){
-                      var evento = snapshot.data!.docs[index];
+                      var eventoa = snapshot.data!.docs[index];
                       return ListTile(
-                        title: Text('${evento['titulo']}'),
+                        title: Text('${eventoa['titulo']}'),
                         
                         leading: Icon(MdiIcons.abacus),
-                        subtitle: Text('${evento['likes']}'),
+                        subtitle: Text('${eventoa['likes']}'),
                         trailing: Icon(MdiIcons.heart),
                       );
                     },

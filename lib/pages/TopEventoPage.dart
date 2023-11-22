@@ -22,12 +22,12 @@ class TopEventoPage extends StatelessWidget {
                     separatorBuilder: (context, index) => Divider(),
                     itemCount: snapshot.data!.docs.length, 
                     itemBuilder: (context, index){
-                      var evento = snapshot.data!.docs[index];
+                      var eventot = snapshot.data!.docs[index];
                       return ListTile(
-                        title: Text('${evento['titulo']}'),
+                        title: Text('${eventot['titulo']}'),
                         
                         leading: Icon(MdiIcons.abacus),
-                        subtitle: Text('${evento['likes']}'),
+                        subtitle: Text('${eventot['likes']}'),
                         trailing: Icon(MdiIcons.heart),
                       );
                     },

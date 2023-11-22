@@ -25,11 +25,11 @@ class FirestoreService{
   }
 
   Stream<QuerySnapshot> EventosActivos() {
-    return FirebaseFirestore.instance.collection('eventos').where('estado', isEqualTo: true).orderBy('fecha').snapshots();
+    return FirebaseFirestore.instance.collection('eventos').where('estado', isEqualTo: true).snapshots();
   }
 
   Stream<QuerySnapshot> EventosFInalizados() {
-    return FirebaseFirestore.instance.collection('eventos').where('estado', isEqualTo: false).orderBy('fecha').snapshots();
+    return FirebaseFirestore.instance.collection('eventos').where('estado', isEqualTo: false).snapshots();
   }
 
 
@@ -42,7 +42,6 @@ class FirestoreService{
     return FirebaseFirestore.instance.collection('eventos')
       .where('fecha', isGreaterThanOrEqualTo: fechaAct)
       .where('fecha', isLessThanOrEqualTo: fechaFut)
-      .orderBy('fecha')
       .snapshots();
   }
 
