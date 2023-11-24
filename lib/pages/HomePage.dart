@@ -36,10 +36,27 @@ class HomePage extends StatelessWidget {
                       var evento = snapshot.data!.docs[index];
                        DateTime fechaEvento = evento['fecha'].toDate();
                       return ListTile(
+                        
                         title: Text('${evento['titulo']} '),
                         leading: Icon(MdiIcons.abacus),
                         subtitle: Text('fecha: ' + formatoFecha.format(fechaEvento) ),
-                        trailing: Icon(MdiIcons.heart),
+                        trailing:  TextButton(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(MdiIcons.heart),
+                                      Text('Me gusta')
+                                    ],
+                                  ),
+                                  onPressed: () {
+                                    var collection = FirebaseFirestore.instance.collection('eventos');
+                                    collection
+                                      .doc(evento.id)
+                                      .update({'likes' : FieldValue.increment(1)}) 
+                                      
+                                      .catchError((er) => print('troleadiña:  $er'));
+                                  },
+                                 ),
                         onLongPress: () {
                           DateTime fechaEvento = evento['fecha'].toDate();
 
