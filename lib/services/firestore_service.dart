@@ -13,8 +13,8 @@ class FirestoreService{
       'tipo': tipo,
       'descripcion': descripcion,
       'foto': foto,
-      'fecha': fecha,
       'estado': estado,
+      'fecha': fecha,
       'likes': likes,
     });
   }
