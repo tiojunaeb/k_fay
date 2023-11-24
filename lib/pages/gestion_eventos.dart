@@ -18,30 +18,45 @@ class GestionEvento extends StatelessWidget {
     AppBar(
       title: Text('Gestionar Evento'),
     ),
-    body: ListView(
+    body: Column(
       children: [
-        ListTile(
-          title: Text('Agregar Evento'),
-          leading: Icon(MdiIcons.applicationEdit),
-          onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>AgregarEvento()));
-            
-          },
-        ),
-        Divider(),
-        ListTile(title: Text('cambiar estado de un evento / Elimnar Evento'),
-        leading: Icon(MdiIcons.eye),
-        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>NavEstadoPage()));
-        },
-        ),
-        Divider(),
-      ListTile(title: Text('Cerrar Sesion'),
-      onTap: ()async{
-        await FirebaseAuth.instance.signOut();
-        await GoogleSignIn().signOut();
+        Expanded(
+          child: ListView(
+            children: [
+              ListTile(
+                title: Text('Agregar Evento'),
+                leading: Icon(MdiIcons.applicationEdit),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>AgregarEvento()));
+                  
+                },
+              ),
+              Divider(),
+              ListTile(title: Text('cambiar estado de un evento / Elimnar Evento'),
+              leading: Icon(MdiIcons.eye),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>NavEstadoPage()));
+              },
+              ),
+              Divider(),
 
-      },)
+            ],
+          ),
+        ),
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(onPressed: ()async{
+                  await FirebaseAuth.instance.signOut();
+                  await GoogleSignIn().signOut();
+                }, 
+                child: Text('Cerrar Sesion', style: TextStyle(color: Colors.white),),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.black
+                ),
+                
+                ),
+                
+        )
       ],
     ),
     );

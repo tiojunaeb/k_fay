@@ -15,10 +15,10 @@ class NavEstadoPage extends StatelessWidget {
     return DefaultTabController(length: 2, child: Scaffold
     (appBar: AppBar(
       title: Text('k-fay',style: TextStyle(color: Colors.white)),
-      backgroundColor: Colors.red,
+      backgroundColor: Colors.black,
       bottom: TabBar(
         labelColor:Colors.white,
-        indicatorColor: Colors.red,
+        indicatorColor: Colors.black,
         unselectedLabelColor: Colors.white,
 
         tabs: [

@@ -78,7 +78,7 @@ class LoginPage extends StatelessWidget {
   }
  
 
-  Future<UserCredential?> logGoogle() async {
+ Future<UserCredential?> logGoogle() async {
   try {
     
     final GoogleSignInAccount? userG = await GoogleSignIn().signIn();
@@ -110,3 +110,6 @@ class LoginPage extends StatelessWidget {
 }
 
 }
+
+  
+

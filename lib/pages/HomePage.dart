@@ -38,8 +38,11 @@ class HomePage extends StatelessWidget {
                        DateTime fechaEvento = evento['fecha'].toDate();
                       return ListTile(
                         
-                        title: Text('${evento['nombre']} '),
-                        leading: Icon(MdiIcons.abTesting),
+                        title: Text('${evento['nombre']}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                        leading: Container(
+                          height: 35,
+                          width: 35,
+                          child: Image.network('${evento['foto']}', fit: BoxFit.cover),),
                         subtitle: Text('fecha: ' + formatoFecha.format(fechaEvento) ),
                         trailing:  Container(
                           width: 120,
@@ -47,8 +50,8 @@ class HomePage extends StatelessWidget {
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        Icon(MdiIcons.heart),
-                                        Text('Me gusta')
+                                        Icon(MdiIcons.heart, color: Colors.red,),
+                                        Text('Me gusta', style: TextStyle(color: Colors.red))
                                       ],
                                     ),
                                     onPressed: () {
@@ -61,29 +64,36 @@ class HomePage extends StatelessWidget {
                                     },
                                    ),
                         ),
+                        onTap: (){
+                          DateTime fechaEvento = evento['fecha'].toDate();
+ 
+                          
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>DetallePage(evento: evento, fechaEvento: fechaEvento)));
+                        },
                         onLongPress: () {
                           DateTime fechaEvento = evento['fecha'].toDate();
-
+ 
                           
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>DetallePage(evento: evento, fechaEvento: fechaEvento))); 
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>DetallePage(evento: evento, fechaEvento: fechaEvento)));
                         },
                       );
                     },
                     );
                 }
           }
-        ) ))
+        ) )),
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(onPressed: (){
+            Navigator.pop(context);
+          }, 
+          style: ElevatedButton.styleFrom(
+            primary: Colors.black
+          ),
+          child: Text('Salir', style: TextStyle(color: Colors.white))),
+        )
       ],),
 
-      //boton agregar evento
-      floatingActionButton: FloatingActionButton(
-        child: Icon(MdiIcons.partyPopper, color: Colors.red,),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-        backgroundColor: Colors.white,
-        onPressed: ()async{
-          await LogGoogle();
-
-        }),
     );
 
   }
