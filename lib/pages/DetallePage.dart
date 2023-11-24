@@ -19,8 +19,8 @@ class DetallePage extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(30),
             child: Container(
-              width: 300,
-              height: 300,
+              width: 250,
+              height: 250,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
@@ -31,52 +31,94 @@ class DetallePage extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 
-                child: Image.asset('assets/paes.png', fit: BoxFit.cover,),
+                child: Image.network('${evento['foto']}', fit: BoxFit.cover),
               )
             ),
           ),
           Container(child: 
-          Text('${evento['nombre']}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('${evento['nombre']}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19)),
+              Text('  '),
+              Icon(MdiIcons.heart),
+              Text(' '),
+              Text('${evento['likes']}',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
+            ],
+          ),
           ),
           Row(
-           children: [
-            Container(
-              padding: EdgeInsets.all(8),
-              child: Icon(MdiIcons.calendar, size: 50,),
-              ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-              Text('${formatoFecha.format(fechaEvento)}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-              Text('Hora: 20:30-5:00')])
-           ],),
-           Container(
-            child: Row(children: [
-              Container(child: 
-              Icon(MdiIcons.mapMarker, size: 50,)),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('${evento['ubicacion']}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-                  Text('Hotel sheraton'),
-                ],
-              )
-              
-            ]
+               
+                   
+                
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(child: Row(
+                      children: [Icon(MdiIcons.calendar),
+                      Text(
+                      '${formatoFecha.format(fechaEvento)}',
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    ),
+                      
+                      ],
+                    ),),
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 0,horizontal: 10),
+                      child:Text('Hora: 20:30-5:00'),)
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(child: Row(
+                      children: [Icon(MdiIcons.mapMarker),
+                      Text('${evento['ubicacion']}',
+                      
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    ),
+                      
+                      ],
+                    ),),
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 0,horizontal: 20),
+                      child:Text('${evento['tipo']}'),)
+                  ],
+                ),
+                
+                  
+               
+                // Espacio entre los elementos
+                
+              ],
             ),
-           ),
-          Row(
-           children: [
-             Icon(MdiIcons.heart, size: 50,),
-             Column(children: [
-              Text('${evento['likes']}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30))
-             ],)
-           ],
-          ),
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0),
+            child: Column(
+            children: [
+                Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('🔥Descripcion del evento 🔥',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(child: Text('${evento['descripcion']}',textAlign: TextAlign.center,))
+              ],
+            ),
+            ],
+          ),),
+        
           Spacer(),
           Row(
             children: [Expanded(child: 
-            Padding(padding: EdgeInsets.all(8), child: ElevatedButton(onPressed: (){}, child: Text('Guardar evento'),
+            Padding(padding: EdgeInsets.all(8), child: ElevatedButton(onPressed: (){
+               Navigator.pop(context);
+            }, child: Text('Volver'),
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(Colors.black),
               foregroundColor: MaterialStateProperty.all(Colors.white)
