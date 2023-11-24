@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:k_fay/pages/DetallePage.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:k_fay/services/firestore_service.dart';
 import 'package:k_fay/widget/WidgetEvento.dart';
@@ -33,12 +34,18 @@ class HomePage extends StatelessWidget {
                     itemCount: snapshot.data!.docs.length, 
                     itemBuilder: (context, index){
                       var evento = snapshot.data!.docs[index];
+                       DateTime fechaEvento = evento['fecha'].toDate();
                       return ListTile(
-                        title: Text('${evento['titulo']}'),
-                        
+                        title: Text('${evento['titulo']} '),
                         leading: Icon(MdiIcons.abacus),
-                        subtitle: Text('${evento['likes']}'),
+                        subtitle: Text('fecha: ' + formatoFecha.format(fechaEvento) ),
                         trailing: Icon(MdiIcons.heart),
+                        onLongPress: () {
+                          DateTime fechaEvento = evento['fecha'].toDate();
+
+                          
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>DetallePage(evento: evento, fechaEvento: fechaEvento))); 
+                        },
                       );
                     },
                     );
@@ -52,8 +59,9 @@ class HomePage extends StatelessWidget {
         child: Icon(MdiIcons.partyPopper, color: Colors.red,),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         backgroundColor: Colors.white,
-        onPressed: () async {
-            await LogGoogle();
+        onPressed: ()async{
+          await LogGoogle();
+
         }),
     );
 

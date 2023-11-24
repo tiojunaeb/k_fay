@@ -22,7 +22,7 @@ class NavPage extends StatelessWidget {
         tabs: [
           Tab(text: 'Actuales'  ),
           Tab(text: 'Top' ),
-          Tab(text: 'Cerca' ),
+          Tab(text: 'Activos' ),
           Tab(text: 'Finalizadas')
         ]),
       ),
