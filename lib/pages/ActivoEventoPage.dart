@@ -25,7 +25,7 @@ class ActivoEventoPage extends StatelessWidget {
                     itemBuilder: (context, index){
                       var eventoa = snapshot.data!.docs[index];
                       return ListTile(
-                        title: Text('${eventoa['titulo']}'),
+                        title: Text('${eventoa['nombre']}'),
                         
                         leading: Icon(MdiIcons.abacus),
                         subtitle: Text('${eventoa['likes']}'),

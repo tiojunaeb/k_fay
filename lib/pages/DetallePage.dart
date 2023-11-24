@@ -36,7 +36,7 @@ class DetallePage extends StatelessWidget {
             ),
           ),
           Container(child: 
-          Text('${evento['titulo']}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19)),
+          Text('${evento['nombre']}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19)),
           ),
           Row(
            children: [

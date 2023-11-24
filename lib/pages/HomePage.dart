@@ -7,9 +7,10 @@ import 'package:k_fay/services/firestore_service.dart';
 import 'package:k_fay/widget/WidgetEvento.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
 
 
 class HomePage extends StatelessWidget {
@@ -37,26 +38,29 @@ class HomePage extends StatelessWidget {
                        DateTime fechaEvento = evento['fecha'].toDate();
                       return ListTile(
                         
-                        title: Text('${evento['titulo']} '),
-                        leading: Icon(MdiIcons.abacus),
+                        title: Text('${evento['nombre']} '),
+                        leading: Icon(MdiIcons.abTesting),
                         subtitle: Text('fecha: ' + formatoFecha.format(fechaEvento) ),
-                        trailing:  TextButton(
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(MdiIcons.heart),
-                                      Text('Me gusta')
-                                    ],
-                                  ),
-                                  onPressed: () {
-                                    var collection = FirebaseFirestore.instance.collection('eventos');
-                                    collection
-                                      .doc(evento.id)
-                                      .update({'likes' : FieldValue.increment(1)}) 
-                                      
-                                      .catchError((er) => print('troleadiña:  $er'));
-                                  },
-                                 ),
+                        trailing:  Container(
+                          width: 120,
+                          child: TextButton(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Icon(MdiIcons.heart),
+                                        Text('Me gusta')
+                                      ],
+                                    ),
+                                    onPressed: () {
+                                      var collection = FirebaseFirestore.instance.collection('eventos');
+                                      collection
+                                        .doc(evento.id)
+                                        .update({'likes' : FieldValue.increment(1)}) 
+                                        
+                                        .catchError((er) => print('troleadiña:  $er'));
+                                    },
+                                   ),
+                        ),
                         onLongPress: () {
                           DateTime fechaEvento = evento['fecha'].toDate();
 

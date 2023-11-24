@@ -53,7 +53,7 @@ class EstadoPage extends StatelessWidget {
                         ),
                         
                         child: ListTile(
-                          title: Text('${evento['titulo']}'),
+                          title: Text('${evento['nombre']}'),
                           
                         leading: Icon(MdiIcons.abacus),
                         subtitle: Text('${evento['likes']}'),

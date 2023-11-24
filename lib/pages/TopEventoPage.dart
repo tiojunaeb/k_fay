@@ -24,7 +24,7 @@ class TopEventoPage extends StatelessWidget {
                     itemBuilder: (context, index){
                       var eventot = snapshot.data!.docs[index];
                       return ListTile(
-                        title: Text('${eventot['titulo']}'),
+                        title: Text('${eventot['nombre']}'),
                         
                         leading: Icon(MdiIcons.abacus),
                         subtitle: Text('${eventot['likes']}'),

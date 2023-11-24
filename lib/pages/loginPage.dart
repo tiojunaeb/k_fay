@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:k_fay/pages/HomePage.dart';
+import 'package:k_fay/pages/NavEstadoPage.dart';
 import 'package:k_fay/pages/gestion_eventos.dart';
 import 'package:k_fay/pages/navpage.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 
 class LoginPage extends StatelessWidget {
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  late Stream<User?> _userStream;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,10 +50,9 @@ class LoginPage extends StatelessWidget {
               ),
               SizedBox(
                 width: double.infinity,
-                child: ElevatedButton(onPressed: (){
-
+                child: ElevatedButton(onPressed: ()async{
+                  await logGoogle();
                   
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>GestionEvento()));
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Colors.black
@@ -72,4 +76,37 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
+ 
+
+  Future<UserCredential?> logGoogle() async {
+  try {
+    
+    final GoogleSignInAccount? userG = await GoogleSignIn().signIn();
+
+   
+    if (userG == null) {
+      throw FirebaseAuthException(
+        code: 'ERROR_ABORTED_BY_USER',
+        message: 'Inicio de sesión cancelado por el usuario',
+      );
+    }
+
+    
+    final GoogleSignInAuthentication? authG = await userG?.authentication;
+
+    
+    final credential = GoogleAuthProvider.credential(
+      accessToken: authG?.accessToken,
+      idToken: authG?.idToken,
+    );
+
+    
+    return await FirebaseAuth.instance.signInWithCredential(credential);
+  } catch (e) {
+    
+    print('Error al iniciar sesión con Google: $e');
+    return null;
+  }
+}
+
 }
