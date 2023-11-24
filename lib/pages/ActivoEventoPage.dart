@@ -4,6 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:k_fay/services/firestore_service.dart';
 
+import 'DetallePage.dart';
+
 class ActivoEventoPage extends StatelessWidget {
   
   final formatoFecha = DateFormat('dd-MM-yyyy');
@@ -55,6 +57,12 @@ class ActivoEventoPage extends StatelessWidget {
                                     },
                                    ),
                         ),
+                        onTap: () {
+                          DateTime fechaEvento = eventoa['fecha'].toDate();
+ 
+                          
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>DetallePage(evento: eventoa, fechaEvento: fechaEvento)));                          
+                        },
                       );
                     },
                     );

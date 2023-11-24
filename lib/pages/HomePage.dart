@@ -70,12 +70,7 @@ class HomePage extends StatelessWidget {
                           
                           Navigator.push(context, MaterialPageRoute(builder: (context)=>DetallePage(evento: evento, fechaEvento: fechaEvento)));
                         },
-                        onLongPress: () {
-                          DateTime fechaEvento = evento['fecha'].toDate();
- 
-                          
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>DetallePage(evento: evento, fechaEvento: fechaEvento)));
-                        },
+                        
                       );
                     },
                     );

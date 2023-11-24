@@ -66,36 +66,34 @@ class DetallePage extends StatelessWidget {
                       ],
                     ),),
                     Container(
-                      padding: EdgeInsets.symmetric(vertical: 0,horizontal: 22),
+                      padding: EdgeInsets.symmetric(vertical: 0,horizontal: 10),
                       child:Text('Hora: 20:30-5:00'),)
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(child: Row(
+                      children: [Icon(MdiIcons.mapMarker),
+                      Text('${evento['ubicacion']}',
+                      
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    ),
+                      
+                      ],
+                    ),),
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 0,horizontal: 20),
+                      child:Text('${evento['tipo']}'),)
                   ],
                 ),
                 
                   
                
                 // Espacio entre los elementos
-                Container(
-                  child: Row(
-                    children: [
-                      Container(
-                        child: Icon(MdiIcons.mapMarker, size: 25),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '${evento['ubicacion']}',
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                          ),
-                          Text('Hotel sheraton'),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+                
               ],
             ),
-            
           Container(
             padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0),
             child: Column(
@@ -103,13 +101,13 @@ class DetallePage extends StatelessWidget {
                 Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Descripcion del evento :)',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
+                Text('🔥Descripcion del evento 🔥',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('${evento['descripcion']}')
+                Expanded(child: Text('${evento['descripcion']}',textAlign: TextAlign.center,))
               ],
             ),
             ],
