@@ -9,6 +9,8 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+
 class AgregarEvento extends StatefulWidget {
   const AgregarEvento({super.key});
 
@@ -24,6 +26,8 @@ class _AgregarEventoState extends State<AgregarEvento> {
   TextEditingController tipoCtrl = TextEditingController();
 
   DateTime fecha = DateTime.now();
+  TimeOfDay hora = TimeOfDay.now();
+
   final fFecha = DateFormat('dd-MM-yyyy');
   final fHora = DateFormat('HH:mm');
 
@@ -31,6 +35,7 @@ class _AgregarEventoState extends State<AgregarEvento> {
   
   bool ImagenSub = true;
   bool FechaSub = true;
+  bool HoraSub = true;
 
 
   final formKey = GlobalKey<FormState>();
@@ -50,64 +55,8 @@ class _AgregarEventoState extends State<AgregarEvento> {
           padding: EdgeInsets.all(10),
           child: ListView(
             children: [
-              ElevatedButton(
-                child: Text('Selecconar Imagen'),
-                onPressed: () async {
-                  imagen = await obtenerImagen();
-                  setState(() {
-                    imagen_up = File(imagen!.path);
-
-
-                  });
-                }, ),
-              ElevatedButton(onPressed: () async {
-                if(imagen_up == null){
-                    ImagenSub = false;
-                    return;
-                }
-
-                final String nfile = imagen!.path.split("/").last;
-
-                final Reference ref = storage.ref().child("imagenes").child(nfile);
-                final UpTask = ref.putFile(imagen_up!);
-
-                final TaskSnapshot snap   = await UpTask.whenComplete(() => true);
-
-                url = await snap.ref.getDownloadURL();
-              }, 
-              child: Text('Subir imagen')
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 15),
-                child: Row(
-                  children: [
-                    Text('Fecha del evento'),
-                    Text(fFecha.format(fecha)),
-                    Spacer(),
-                    IconButton(
-                      icon: Icon(MdiIcons.calendar),
-                      onPressed: () {
-                        showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(2022),
-                          lastDate: DateTime.now(),
-                          locale: Locale('es', 'ES'),
-                        ).then((v_fecha) {
-
-                          if(v_fecha == null){
-                            FechaSub = false;
-                            return;
-                          }
-                          setState(() {
-                            fecha = v_fecha;
-                          });
-                        });
-                      },
-                    ),
-                  ],
-                ),
-              ),
+              
+            
               TextFormField(
                 controller: tituloCtrl,
                 decoration: InputDecoration(
@@ -118,14 +67,6 @@ class _AgregarEventoState extends State<AgregarEvento> {
                     return 'Indique el titulo';
                   }
 
-                  if (ImagenSub == false){
-                    return 'Seleccione una imagen';
-                  }
-
-                  if (FechaSub == false){
-                    return 'Seleccione una fecha';
-                  }
-                
                   return null;
                 },
               ),
@@ -148,7 +89,7 @@ class _AgregarEventoState extends State<AgregarEvento> {
 
                 validator: (ubi) {
                   if (ubi!.isEmpty) {
-                    return 'Indique la descripcion';
+                    return 'Indique la ubicacion';
                   }
                   return null;
                 },
@@ -164,6 +105,102 @@ class _AgregarEventoState extends State<AgregarEvento> {
                   return null;
                 },
               ),
+              Container(
+                margin: EdgeInsets.only(top: 15),
+                child: Text('(Por default sera la fecha de hoy)'),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 15),
+                child: Row(
+                  children: [
+                    Text('Fecha del evento: '),
+                   
+                    Text(fFecha.format(fecha)),
+                    Spacer(),
+                    IconButton(
+                      icon: Icon(MdiIcons.calendar),
+                      onPressed: () {
+                          print('ffffffff');
+                          showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2022),
+                          lastDate: DateTime(2025),
+                          locale: Locale('es', 'ES'),
+                        ).then((v_fecha) {
+                          
+                          setState(() {
+                            if (v_fecha == null) {
+                            FechaSub = false;
+                            return;
+                          }
+                            fecha = v_fecha ?? fecha;
+                          });
+                        });
+
+                      },
+
+                    ),
+                  ],
+                ),
+              ),
+               Container(
+                margin: EdgeInsets.only(top: 15),
+                child: Row(
+                  children: [
+                    Text('Hora del evento: '),
+                    Text(fHora.format(fecha)),
+                    Spacer(),
+                    
+                    IconButton(
+                      icon: Icon(Icons.ac_unit_sharp),
+                      onPressed: () {
+                          print('ffffffff');
+                         
+                          showTimePicker(
+                              context: context,
+                              initialTime: TimeOfDay(
+                                hour: hora.hour,
+                                minute: hora.minute,
+                              ), 
+                            ).then((v_hora){
+                              if (v_hora == null) {
+                                  HoraSub = false;
+                                  return;
+                                }
+
+                                setState(() {
+                                  fecha = DateTime(
+                                    fecha.year,
+                                    fecha.month,
+                                    fecha.day,
+                                    v_hora.hour,
+                                    v_hora.minute,
+                                    );
+                              });
+                            
+                            });
+
+                      },
+
+                    ),
+                  ],
+                ),
+              ),
+              ElevatedButton(
+                child: Text('Seleccionar Imagen'),
+                onPressed: () async {
+                  imagen = await obtenerImagen();
+                  
+                  setState(() {
+
+                    if(imagen != null){
+                    imagen_up = File(imagen!.path);
+                    }
+                
+
+                  });
+                }, ),
               
               imagen_up != null ? Image.file(imagen_up!) : Container(
                 margin: EdgeInsets.only(top: 10),
@@ -180,9 +217,30 @@ class _AgregarEventoState extends State<AgregarEvento> {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
                   child: Text('Agregar Evento', style: TextStyle(color: Colors.red)),
-                  onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                                  
+                  onPressed: () async{
+                    
+                     if(imagen == null){
+                      
+                      EasyLoading.showError('Seleccione una imagen', duration: Duration(seconds: 1));
+
+                      return;
+                      }
+                     
+                     
+
+                    final String nfile = imagen!.path.split("/").last;
+
+                    final Reference ref = storage.ref().child("imagenes").child(nfile);
+                    final UpTask = ref.putFile(imagen_up!);
+
+                    final TaskSnapshot snap   = await UpTask.whenComplete(() => true);
+
+                    url = await snap.ref.getDownloadURL();
+
+                    if (formKey.currentState!.validate() && ImagenSub && FechaSub) {
+
+                      
+                           
                       FirestoreService().AddEvento(
                         tituloCtrl.text.trim(),
                         ubiCtrl.text.trim(),
@@ -191,10 +249,13 @@ class _AgregarEventoState extends State<AgregarEvento> {
                         url.trim(),
                         true,
                         fecha,
+                        
                         0,
                       );
                       Navigator.pop(context);
                     }
+                  
+                  
                   },
                 ),
               ),

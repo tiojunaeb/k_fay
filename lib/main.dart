@@ -6,7 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:k_fay/pages/filtro.dart';
 import 'package:k_fay/services/auth_service.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 
 
@@ -27,6 +28,11 @@ class MyApp extends StatelessWidget {
       initialData: null,
       value: AuthService().usuario,
       child: MaterialApp(
+          
+          localizationsDelegates: GlobalMaterialLocalizations.delegates,
+          supportedLocales: [Locale('es')],
+          builder: EasyLoading.init(),
+        
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: ThemeData(
