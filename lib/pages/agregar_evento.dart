@@ -79,6 +79,10 @@ class _AgregarEventoState extends State<AgregarEvento> {
                   if (desc!.isEmpty) {
                     return 'Indique la descripcion';
                   }
+
+                  if (desc!.length >= 350) {
+                    return 'La descripcion debe ocupar como maximo 350 caracteres';
+                  }
                   return null;
                 },
               ),TextFormField(
@@ -237,7 +241,7 @@ class _AgregarEventoState extends State<AgregarEvento> {
 
                     url = await snap.ref.getDownloadURL();
 
-                    if (formKey.currentState!.validate() && ImagenSub && FechaSub) {
+                    if (formKey.currentState!.validate()) {
 
                       
                            
