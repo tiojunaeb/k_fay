@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:k_fay/pages/HomePage.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:k_fay/pages/filtro.dart';
 import 'package:k_fay/services/auth_service.dart';

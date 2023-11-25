@@ -47,13 +47,12 @@ class DetallePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
               
-              Icon(MdiIcons.heart),
-              Text('${evento['likes']}         ')
+             
             ],)
           ],)
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.start,
               children: [
                
                    
@@ -62,44 +61,30 @@ class DetallePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(child: Row(
+                      
                       children: [Icon(MdiIcons.calendar),
-                      Text(
-                      '${formatoFecha.format(fechaEvento)}',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                    ),
+                      Text('${formatoFecha.format(fechaEvento)}',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                      Text('                                                 '),
+                       Icon(MdiIcons.heart),
+                      Text('${evento['likes']}')
                       
                       ],
                     ),),
                     Container(
                      
-                      padding: EdgeInsets.symmetric(vertical: 0,horizontal: 10),
-                      child:Text('Hora: '+formatoHora.format(fechaEvento)),)
+                      padding: EdgeInsets.symmetric(vertical: 0,horizontal: 5),
+                      child:Text('Hora De inicio: '+formatoHora.format(fechaEvento)),)
                   ],
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(child: Row(
-                      children: [Icon(MdiIcons.mapMarker),
-                      Text('${evento['ubicacion']}',
-                      
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                    ),
-                      
-                      ],
-                    ),),
-                    Container(
-                      padding: EdgeInsets.symmetric(vertical: 0,horizontal: 20),
-                      child:Text('${evento['tipo']}'),)
-                  ],
-                ),
-                
-                  
-               
-                // Espacio entre los elementos
                 
               ],
+              
             ),
+            Row(
+              children: [Icon(MdiIcons.mapMarker),
+                Text('${evento['ubicacion']}',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),), 
+                      ],
+            ),  
           Container(
             padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0),
             child: Column(
