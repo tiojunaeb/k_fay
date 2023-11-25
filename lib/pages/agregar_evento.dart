@@ -188,7 +188,7 @@ class _AgregarEventoState extends State<AgregarEvento> {
                 ),
               ),
               ElevatedButton(
-                child: Text('Seleccionar Imagen'),
+                child: Text('Seleccionar Imagen', style: TextStyle(color: Colors.white),),
                 onPressed: () async {
                   imagen = await obtenerImagen();
                   
@@ -200,7 +200,11 @@ class _AgregarEventoState extends State<AgregarEvento> {
                 
 
                   });
-                }, ),
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.black
+                ),
+                 ),
               
               imagen_up != null ? Image.file(imagen_up!) : Container(
                 margin: EdgeInsets.only(top: 10),
@@ -216,7 +220,7 @@ class _AgregarEventoState extends State<AgregarEvento> {
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
-                  child: Text('Agregar Evento', style: TextStyle(color: Colors.red)),
+                  child: Text('Agregar Evento', style: TextStyle(color: Colors.white)),
                   onPressed: () async{
                     
                      if(imagen == null){

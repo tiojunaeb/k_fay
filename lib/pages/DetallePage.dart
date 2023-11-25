@@ -6,8 +6,10 @@ class DetallePage extends StatelessWidget {
   final dynamic evento;
   final DateTime fechaEvento;
   DetallePage({required this.evento, required this.fechaEvento});
+
   final formatoFecha = DateFormat('dd-MM-yyyy');
-  @override
+  final formatoHora = DateFormat('HH:mm');
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -36,16 +38,19 @@ class DetallePage extends StatelessWidget {
             ),
           ),
           Container(child: 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('${evento['nombre']}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19)),
-              Text('  '),
+          Column(children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [Text('${evento['nombre']}',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30))],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+              
               Icon(MdiIcons.heart),
-              Text(' '),
-              Text('${evento['likes']}',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
-            ],
-          ),
+              Text('${evento['likes']}         ')
+            ],)
+          ],)
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -66,8 +71,9 @@ class DetallePage extends StatelessWidget {
                       ],
                     ),),
                     Container(
+                     
                       padding: EdgeInsets.symmetric(vertical: 0,horizontal: 10),
-                      child:Text('Hora: 20:30-5:00'),)
+                      child:Text('Hora: '+formatoHora.format(fechaEvento)),)
                   ],
                 ),
                 Column(

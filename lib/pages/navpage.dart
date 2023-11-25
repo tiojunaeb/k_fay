@@ -18,10 +18,12 @@ class NavPage extends StatelessWidget {
         labelColor:Colors.white,
         indicatorColor: Colors.white,
         unselectedLabelColor: Colors.white,
+        unselectedLabelStyle: TextStyle(fontSize: 10),
+        
 
         tabs: [
           Tab(text: 'publicados'),
-          Tab(text: 'Top' ),
+          Tab(text: 'proximos' ),
           Tab(text: 'Activos' ),
           Tab(text: 'Finalizadas')
         ]),
