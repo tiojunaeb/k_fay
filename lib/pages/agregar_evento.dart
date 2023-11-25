@@ -157,7 +157,7 @@ class _AgregarEventoState extends State<AgregarEvento> {
                     Spacer(),
                     
                     IconButton(
-                      icon: Icon(Icons.ac_unit_sharp),
+                      icon: Icon(MdiIcons.clock),
                       onPressed: () {
                           print('ffffffff');
                          
